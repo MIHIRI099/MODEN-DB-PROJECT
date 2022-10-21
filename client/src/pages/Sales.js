@@ -31,11 +31,11 @@ const Sales = () => {
   }
 
   return (
-  
+   
       <div className="App">
         <div className="information2">
         </div> 
-        <div className='show2'>
+        <div className='show3'>
         <button onClick={showStock}>Show stock Details</button>    
         {StockList.map((val,key) => {
           return <div className='showStock'>
