@@ -48,11 +48,24 @@ app.post("/createNewBatch", (req, res)  => {
  
 });
 
- app.put('/updatePrice', (req, res) => {
-    const PRODUCT_CODE = req.body.PRODUCT_CODE;
-    const PRICE_RUPEES = req.body.PRICE_RUPEES;
 
-    db.query("UPDATE product SET PRICE_RUPEES = ? WHERE PRODUCT_CODE = ?", [PRICE_RUPEES, PRODUCT_CODE], (err, result) => {
+app.get("/showShops",  (req,res)=>{
+    db.query("SELECT * FROM store ", (err,result) => {
+ if(err){
+     res.send(err);
+     console.log(err);  
+ }else{
+     res.send(result);              
+ }
+ });   
+ 
+});
+
+ app.put('/updatePrice', (req, res) => {
+    const STORE_NAME = req.body.STORE_NAME;
+    const BALANCE = req.body.BALANCE;
+
+    db.query("UPDATE store SET BALANCE = ? WHERE PRODUCT_CODE = ?", [BALANCE, STORE_NAME], (err, result) => {
         if(err){
             res.send(err);
             console.log(err);  
@@ -62,6 +75,22 @@ app.post("/createNewBatch", (req, res)  => {
         });   
         
     }); 
+
+    app.put('/updateBalance', (req, res) => {
+        const PRODUCT_CODE = req.body.PRODUCT_CODE;
+        const PRICE_RUPEES = req.body.PRICE_RUPEES;
+    
+        db.query("UPDATE product SET PRICE_RUPEES = ? WHERE PRODUCT_CODE = ?", [PRICE_RUPEES, PRODUCT_CODE], (err, result) => {
+            if(err){
+                res.send(err);
+                console.log(err);  
+            }else{
+                res.send(result);              
+            }
+            });   
+            
+        }); 
+    
 
     app.delete('/delete/:BATCH_NUMBER', (req, res) => {
         const BATCH_NUMBER = req.params.BATCH_NUMBER;
