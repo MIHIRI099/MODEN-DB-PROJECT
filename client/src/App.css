@@ -121,6 +121,31 @@
   color: rgb(190, 38, 38);
   cursor: pointer;
 }
+
+.show3 {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+  
+}
+
+.show3 button{
+  font-size: 20px;
+  width: 170px;
+  height: 50px;
+  background-color: rgb(60, 54, 54);
+  color: rgb(193, 103, 103);
+  margin-top: 15px;
+  
+    
+}
+
+.show3 button:hover {
+  background-color: rgb(255, 255, 255);
+  color: rgb(190, 38, 38);
+  cursor: pointer;
+}
 .productshow  {
   font-size: 13px;
   width: 700px;
