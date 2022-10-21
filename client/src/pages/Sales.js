@@ -6,21 +6,26 @@ import axios from 'axios';
 
 const Sales = () => {
 
-  const [StList,setShopList] =useState([]);
-  const [NewBalance,setNewBalance] =useState("");
-
-  const showShops = () => {
-    axios.get("http://localhost:3001/ShowShops", {
+  const [StockList,setStockList] =useState([]);
+  const [OnSaleList,setOnSaleList] =useState([]);
+ 
+  const showStock = () => {
+    axios.get("http://localhost:3001/ShowStock", {
     }).then((response) => {
-      setShopList(response.data);
+      setStockList(response.data);
+  });
+  };
+  const showOnSale = () => {
+    axios.get("http://localhost:3001/ShowOnSale", {
+    }).then((response) => {
+      setOnSaleList(response.data);
   });
   };
 
-  const updateBalance = (STORE_NAME) => {
-    axios.put("http://localhost:3001/updateBalance", {BALANCE : NewBalance, STORE_NAME:STORE_NAME}).then
-    ((response) => {
-      setShopList(ShopList.map((val) => {
-        return val.STORE_NAME == STORE_NAME ? {STORE_NAME: val.STORE_NAME,STORE_LOCATION: val.STORE_LOCATION,BALANCE: NewBalance}: val
+  const deleteBatch = (BATCH_NUMBER) => {
+    axios.delete(`http://localhost:3001/delete/${BATCH_NUMBER}`).then((response) => {
+      setStockList(StockList.filter((val) => {
+        return val.BATCH_NUMBER != BATCH_NUMBER;
       }))
     })
   }
@@ -31,21 +36,15 @@ const Sales = () => {
         <div className="information2">
         </div> 
         <div className='show2'>
-        <button onClick={showShops}>Show shop Details</button>    
-        {ShopList.map((val,key) => {
-          return <div className='shopshow'>
+        <button onClick={showStock}>Show stock Details</button>    
+        {StockList.map((val,key) => {
+          return <div className='showStock'>
             <div>
-            <h3>STORE_NAME:  {val.STORE_NAME}</h3>
-            <h3>STORE_LOCATION:  {val.STORE_LOCATION}</h3>
-            <h3>BALANCE:  {val.BALANCE}</h3>
+            <h3>BATCH_NUMBER:  {val.BATCH_NUMBER}</h3>
+            <h3>QUANTITY_AT_STOCK:  {val.QUANTITY_AT_STOCK}</h3>
             </div>
           <div>
-          <input type="text" placeholder="update_BALANCE" 
-          onChange={(event)=>{
-            setNewBalance(event.target.value);
-          }}
-          />
-           <button onClick={()=>{updateBalance(val.STORE_NAME)}}>Update_balance</button>
+            <button onClick={()=>{deleteBatch(val.BATCH_NUMBER)}}>Delete</button>
          </div>
          </div>
          
@@ -59,4 +58,4 @@ const Sales = () => {
 
 
   
-export default Stores;
+export default Sales;

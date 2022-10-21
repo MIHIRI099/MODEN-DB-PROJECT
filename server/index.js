@@ -15,7 +15,7 @@ const db = mysql.createPool({
     database: 'moden',
 });
 
-app.post("/createNewBatch", (req, res)  => {
+    app.post("/createNewBatch", (req, res)  => {
    
     const PRODUCT_CODE = req.body.PRODUCT_CODE;
     const BATCH_NUMBER = req.body.BATCH_NUMBER;
@@ -61,6 +61,18 @@ app.get("/showShops",  (req,res)=>{
  
 });
 
+app.get("/ShowStock",  (req,res)=>{
+    db.query("SELECT * FROM onstock ", (err,result) => {
+ if(err){
+     res.send(err);
+     console.log(err);  
+ }else{
+     res.send(result);              
+ }
+ });   
+ 
+});
+
  app.put('/updatePrice', (req, res) => {
     const STORE_NAME = req.body.STORE_NAME;
     const BALANCE = req.body.BALANCE;
@@ -94,7 +106,7 @@ app.get("/showShops",  (req,res)=>{
 
     app.delete('/delete/:BATCH_NUMBER', (req, res) => {
         const BATCH_NUMBER = req.params.BATCH_NUMBER;
-        db.query("DELETE FROM product_quantity WHERE BATCH_NUMBER = ?", BATCH_NUMBER, (err, result) => {
+        db.query("DELETE FROM onstock WHERE BATCH_NUMBER = ?", BATCH_NUMBER, (err, result) => {
             if(err){
                 res.send(err);
                 console.log(err);
