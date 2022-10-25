@@ -2,6 +2,7 @@ import React from "react";
 import "../App"; 
 import{useState} from 'react';
 import axios from 'axios';
+import { useEffect } from "react";
 
 
 const Sales = () => {
@@ -9,18 +10,18 @@ const Sales = () => {
   const [StockList,setStockList] =useState([]);
   const [OnSaleList,setOnSaleList] =useState([]);
  
-  const showStock = () => {
+  useEffect (() => {
     axios.get("http://localhost:3001/ShowStock", {
     }).then((response) => {
       setStockList(response.data);
-  });
-  };
-  const showOnSale = () => {
+  })
+  },[]);
+  useEffect (() => {
     axios.get("http://localhost:3001/ShowOnSale", {
     }).then((response) => {
       setOnSaleList(response.data);
-  });
-  };
+  })
+  },[]);
 
   const deleteBatch = (BATCH_NUMBER) => {
     axios.delete(`http://localhost:3001/delete/${BATCH_NUMBER}`).then((response) => {
@@ -29,17 +30,19 @@ const Sales = () => {
       }))
     })
   }
+  
 
   return (
    
       <div className="App">
-        <div className="information2">
+        <div className="information">
         </div> 
-        <div className='show3'>
-        <button onClick={showStock}>Show stock Details</button>    
+        <div className='show'>
+        <h1>PRODUCTS_ON_STOCK</h1>
         {StockList.map((val,key) => {
-          return <div className='showStock'>
+          return <div className='ShowStock'>
             <div>
+             
             <h3>BATCH_NUMBER:  {val.BATCH_NUMBER}</h3>
             <h3>QUANTITY_AT_STOCK:  {val.QUANTITY_AT_STOCK}</h3>
             </div>
@@ -50,7 +53,8 @@ const Sales = () => {
          
         })}
         </div>
-      </div>
+    
+        </div>
         
     );
   }

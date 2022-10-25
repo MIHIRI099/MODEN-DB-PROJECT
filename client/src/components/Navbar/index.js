@@ -11,8 +11,11 @@ const Navbar = () => {
       <Nav>
       <img src={img1} alt="header" />
         <NavMenu>
+          <NavLink to="/Home" activeStyle>
+          <h1>Home</h1>
+          </NavLink>
           <NavLink to="/HomeProducts" activeStyle>
-            <h1>HomeProducts</h1>
+          <h1>HomeProducts</h1>
           </NavLink>
           <NavLink to="/BatchQuantity" activeStyle>
           <h1>BatchQuantity</h1>

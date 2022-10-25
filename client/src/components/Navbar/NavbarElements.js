@@ -16,7 +16,7 @@ export const NavLink = styled(Link)`
   display: flex;
   align-items: center;
   text-decoration: none;
-  padding: 0 2rem;
+  padding: 0 1.5rem;
   height: 100%;
   cursor: pointer;
   &.active {
@@ -41,11 +41,11 @@ export const Bars = styled(FaBars)`
 export const NavMenu = styled.div`
   display: flex;
   align-items: center;
-  margin-right: -24px;
+  margin-right: -18px;
   /* Second Nav */
-  /* margin-right: 24px; */
+  /* margin-right: 18px; */
   /* Third Nav */
-  /* width: 100vw;
+  /* width: 80vw;
 white-space: nowrap; */
   @media screen and (max-width: 768px) {
     display: none;

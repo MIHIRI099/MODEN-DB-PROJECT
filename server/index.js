@@ -24,8 +24,8 @@ const db = mysql.createPool({
     const TOTAL_QUANTITY = req.body.TOTAL_QUANTITY;
 
   
-      db.query("INSERT INTO product_quantity(PRODUCT_CODE,BATCH_NUMBER,MANUFACTURING_DATE,EXPIRE_DATE,TOTAL_QUANTITY) VALUES (?,?,?,?,?)", 
-      [PRODUCT_CODE,BATCH_NUMBER,MANUFACTURING_DATE,EXPIRE_DATE,TOTAL_QUANTITY], 
+    db.query("INSERT INTO product_quantity(PRODUCT_CODE,BATCH_NUMBER,MANUFACTURING_DATE,EXPIRE_DATE,TOTAL_QUANTITY) VALUES (?,?,?,?,?)", 
+    [PRODUCT_CODE,BATCH_NUMBER,MANUFACTURING_DATE,EXPIRE_DATE,TOTAL_QUANTITY], 
       (err, result) => {
           if (err) {
               console.log(err)
@@ -33,47 +33,63 @@ const db = mysql.createPool({
               res.send('Values inserted')
           }
       });
-  });
+    });
 
 
-  app.get("/Showproducts",  (req,res)=>{
+    app.get("/Showproducts",  (req,res)=>{
     db.query("SELECT * FROM product ", (err,result) => {
- if(err){
-     res.send(err);
-     console.log(err);  
- }else{
+    if(err){
+      res.send(err);
+      console.log(err);  
+    }else
+    {
      res.send(result);              
- }
- });   
+    }
+    });   
  
-});
+    });
 
 
-app.get("/showShops",  (req,res)=>{
+    app.get("/showShops",  (req,res)=>{
     db.query("SELECT * FROM store ", (err,result) => {
- if(err){
-     res.send(err);
-     console.log(err);  
- }else{
+    if(err){
+      res.send(err);
+      console.log(err);  
+    }else
+    {
      res.send(result);              
- }
- });   
+   }
+   });   
  
-});
+   });
 
-app.get("/ShowStock",  (req,res)=>{
+    app.get("/ShowStock",  (req,res)=>{
     db.query("SELECT * FROM onstock ", (err,result) => {
- if(err){
+    if(err){
      res.send(err);
      console.log(err);  
- }else{
+    }
+    else{
      res.send(result);              
- }
- });   
+    }
+    });   
  
-});
+    });
+    app.get("/ShowOnSale",  (req,res)=>{
+        db.query("SELECT * FROM onsale ", (err,result) => {
+        if(err){
+         res.send(err);
+         console.log(err);  
+        }
+        else{
+         res.send(result);              
+        }
+        });   
+     
+        });
+    
 
- app.put('/updatePrice', (req, res) => {
+    app.put('/updatePrice', (req, res) => {
     const STORE_NAME = req.body.STORE_NAME;
     const BALANCE = req.body.BALANCE;
 

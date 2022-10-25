@@ -2,19 +2,19 @@ import React from "react";
 import "../App"; 
 import{useState} from 'react';
 import axios from 'axios';
-
+import{useEffect} from 'react';
 
 const Stores = () => {
 
   const [ShopList,setShopList] =useState([]);
   const [NewBalance,setNewBalance] =useState("");
 
-  const showShops = () => {
+  useEffect (() => {
     axios.get("http://localhost:3001/ShowShops", {
     }).then((response) => {
       setShopList(response.data);
-  });
-  };
+  })
+  },[]);
 
   const updateBalance = (STORE_NAME) => {
     axios.put("http://localhost:3001/updateBalance", {BALANCE : NewBalance, STORE_NAME:STORE_NAME}).then
@@ -28,10 +28,10 @@ const Stores = () => {
   return (
   
       <div className="App">
-        <div className="information2">
+        <div className="information">
         </div> 
         <div className='show2'>
-        <button onClick={showShops}>Show shop Details</button>    
+          
         {ShopList.map((val,key) => {
           return <div className='shopshow'>
             <div>

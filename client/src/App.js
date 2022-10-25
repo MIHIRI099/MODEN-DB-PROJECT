@@ -117,7 +117,7 @@ return (
     <Router>
     <Navbar />
     <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/Home" element={<Home />} />
         <Route  path='/HomeProducts'  element={<HomeProducts />} />
         <Route path='/BatchQuantity' element={<BatchQuantity/>} />
         <Route path='/Sales' element={<Sales/>} />

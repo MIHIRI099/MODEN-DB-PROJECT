@@ -2,19 +2,19 @@ import React from "react";
 import "../App"; 
 import{useState} from 'react';
 import axios from 'axios';
-
+import { useEffect } from "react";
 
 const HomeProducts = () => {
 
   const [productList,setProductList] =useState([]);
   const [NewPRICE_RUPEES,setNewPRICE_RUPEES] = useState([0])
 
-  const showProducts = () => {
+    useEffect(() => {
     axios.get("http://localhost:3001/Showproducts", {
     }).then((response) => {
       setProductList(response.data);
   });
-  };
+  },[]);
 
   const updatePrice = (PRODUCT_CODE) => {
     axios.put("http://localhost:3001/updatePrice", {PRICE_RUPEES : NewPRICE_RUPEES, PRODUCT_CODE:PRODUCT_CODE}).then
@@ -31,7 +31,7 @@ const HomeProducts = () => {
         <div className="information">
         </div> 
         <div className='show'>
-        <button onClick={showProducts}>Show Products</button>    
+    
         {productList.map((val,key) => {
           return <div className='productshow'>
             <div>

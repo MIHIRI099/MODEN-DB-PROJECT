@@ -2,7 +2,6 @@
 import "../App"; 
 import{useState} from 'react';
 import axios from 'axios';
-
 import React from 'react';
 import img1 from './images/1.jpeg';
 import img2 from './images/2.jpeg';
@@ -30,7 +29,7 @@ const Home = () => {
       <img src={img5} alt="header" />
       <img src={img6} alt="header" />
       <img src={img7} alt="header" />
-      <button onClick={()=>{logout()}}>LogOut</button>
+      <button onClick={()=>{logout()}}><h2>LogOut</h2></button>
   
     </div>
   
