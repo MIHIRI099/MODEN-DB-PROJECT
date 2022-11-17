@@ -9,6 +9,7 @@ const Sales = () => {
 
   const [StockList,setStockList] =useState([]);
   const [OnSaleList,setOnSaleList] =useState([]);
+
  
   useEffect (() => {
     axios.get("http://localhost:3001/ShowStock", {
@@ -17,7 +18,7 @@ const Sales = () => {
   })
   },[]);
   useEffect (() => {
-    axios.get("http://localhost:3001/ShowOnSale", {
+    axios.get("http://localhost:3001/ShowSALE", {
     }).then((response) => {
       setOnSaleList(response.data);
   })
@@ -34,26 +35,47 @@ const Sales = () => {
 
   return (
    
-      <div className="App">
+      <div className="AppContainer">
         <div className="information">
         </div> 
-        <div className='show'>
+       
+        <div className="new">
+        
+          <div className='show4'>
         <h1>PRODUCTS_ON_STOCK</h1>
         {StockList.map((val,key) => {
           return <div className='ShowStock'>
             <div>
-             
-            <h3>BATCH_NUMBER:  {val.BATCH_NUMBER}</h3>
-            <h3>QUANTITY_AT_STOCK:  {val.QUANTITY_AT_STOCK}</h3>
-            </div>
-          <div>
-            <button onClick={()=>{deleteBatch(val.BATCH_NUMBER)}}>Delete</button>
-         </div>
+             <h3>PRODUCT_NAME: {val.PRODUCT_NAME}<br></br>
+           BATCH_NUMBER:  {val.BATCH_NUMBER}<br></br>
+           QUANTITY_AT_STOCK:  {val.TOTAL_QUANTITY}<br></br></h3>
+           <button onClick={()=>{deleteBatch(val.BATCH_NUMBER)}}>Delete</button>
+          </div>
+        
          </div>
          
         })}
         </div>
+        <div className = 'show5'>
+          <br></br>
+        <h1>PRODUCTS_ON_STORES</h1>
+        {OnSaleList.map((val,key) => {
+          return <div className='ShowSALE'>
+            <div>
+             <h3>PRODUCT_NAME: {val.PRODUCT_NAME}<br></br>
+           STORE_NAME:  {val.STORE_NAME}<br></br>
+           QUANTITY_AT_STORE:  {val.QUANTITY_NO_OF_UNITS}<br></br></h3>
+            
+            </div>
+         
+         </div>
+         
+         
+        })}
+        </div>
+        </div>
     
+
         </div>
         
     );

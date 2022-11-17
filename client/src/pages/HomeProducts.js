@@ -4,6 +4,8 @@ import{useState} from 'react';
 import axios from 'axios';
 import { useEffect } from "react";
 
+
+
 const HomeProducts = () => {
 
   const [productList,setProductList] =useState([]);
@@ -35,11 +37,13 @@ const HomeProducts = () => {
         {productList.map((val,key) => {
           return <div className='productshow'>
             <div>
-            <h3>PRODUCT_NAME:  {val.PRODUCT_NAME}</h3>
+              <br></br>
+            <h1 color="blue"> {val.PRODUCT_NAME}</h1>
             <h3>PRODUCT_CODE:  {val.PRODUCT_CODE}</h3>
             <h3>WEIGHT_KG:  {val.WEIGHT}</h3>
             <h3>PRICE_RUPEES:  {val.PRICE_RUPEES}</h3>
             <h3>TIME_PERIOD_MONTHS:  {val.TIME_PERIOD_MONTHS}</h3>
+            <br></br>
             </div>
           <div>
           <input type="text" placeholder="update_price" 

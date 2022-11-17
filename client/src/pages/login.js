@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 import img1 from './images/logo.png';
+import "../App"; 
 
 
 const Modal = () => {
@@ -28,17 +29,19 @@ const Modal = () => {
  
 
   return (
-    <div className="wrapper">
+    <div className=".App">
       <div align="center" className="form">
+      <br></br>
+      <br></br>
       <img src={img1} alt="header" />
-        <h1 className="title">Welcome</h1>
-
+        <h1 className="title">WELCOME</h1>
         <form >
           <input type="text" value={email} onChange={(e) => setUsername(e.target.value)} className="input" placeholder="example@email.com" required />
           <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} className="input" placeholder="Password" required />
           <div align="center" className='d_flex'>
+            <br></br>
             <button onClick={login} type="submit" className="button">
-              <span><h1>Login</h1></span>
+              <span><h2>Login</h2></span>
             </button>
           </div>
         </form>

@@ -64,7 +64,7 @@ const db = mysql.createPool({
    });
 
     app.get("/ShowStock",  (req,res)=>{
-    db.query("SELECT * FROM onstock ", (err,result) => {
+    db.query("SELECT product.PRODUCT_NAME, product_quantity.BATCH_NUMBER, product_quantity.TOTAL_QUANTITY FROM product join product_quantity on product.PRODUCT_CODE = product_quantity.PRODUCT_CODE", (err,result) => {
     if(err){
      res.send(err);
      console.log(err);  
@@ -72,7 +72,19 @@ const db = mysql.createPool({
     else{
      res.send(result);              
     }
-    });   
+    });  
+}); 
+
+    app.get("/ShowSALE",  (req,res)=>{
+        db.query("SELECT store.STORE_NAME,product.PRODUCT_NAME, onsale.QUANTITY_NO_OF_UNITS FROM onsale join store on store.STORE_NAME = onsale.STORE_NAME join product on onsale.PRODUCT_CODE = product.PRODUCT_CODE ",(err,result) => { 
+        if(err){
+         res.send(err);
+         console.log(err);  
+        }
+        else{
+         res.send(result);              
+        }
+        });   
  
     });
     app.get("/ShowOnSale",  (req,res)=>{
@@ -87,7 +99,31 @@ const db = mysql.createPool({
         });   
      
         });
-    
+    app.get("/ShowDetails",  (req,res)=>{
+        const SELECTED= req.body.SELECTED;
+            db.query("SELECT * FROM product_quantity WHERE product_quantity.PRODUCT_CODE = SELECTED= ?", (err,result) => {
+            if(err){
+              res.send(err);
+              console.log(err);  
+            }else
+            {
+             res.send(result);              
+            }
+            });   
+         
+            });    
+    app.get("/ShowBatches",  (req,res)=>{
+                db.query("SELECT * FROM product_quantity ", (err,result) => {
+                if(err){
+                  res.send(err);
+                  console.log(err);  
+                }else
+                {
+                 res.send(result);              
+                }
+                });   
+             
+                });    
 
     app.put('/updatePrice', (req, res) => {
     const STORE_NAME = req.body.STORE_NAME;
@@ -150,6 +186,19 @@ const db = mysql.createPool({
     });
 
 
+ app.get("/stockAtSale",(req,res)=>{
+    const STORE_NAME = req.body.STORE_NAME; 
+    db.query("SELECT store.STORE_NAME,product.PRODUCT_NAME, onsale.QUANTITY_NO_OF_UNITS FROM onsale join store on store.STORE_NAME = onsale.STORE_NAME join product on onsale.PRODUCT_CODE = product.PRODUCT_CODEWHERE store.STORE_NAME = ?"
+    [STORE_NAME],(err,result)=>{
+        if(err){
+            res.send({err:err});
+        }
+        else{
+            res.send(result);
+            console.log(result);
+        }
+    });
+  });    
 app.listen(3001, () => {
     console.log('Server is running on port 3001');
 });

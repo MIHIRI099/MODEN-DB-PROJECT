@@ -16,6 +16,8 @@ const Stores = () => {
   })
   },[]);
 
+  
+
   const updateBalance = (STORE_NAME) => {
     axios.put("http://localhost:3001/updateBalance", {BALANCE : NewBalance, STORE_NAME:STORE_NAME}).then
     ((response) => {
